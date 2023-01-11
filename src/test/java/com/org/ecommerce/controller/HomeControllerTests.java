@@ -1,7 +1,6 @@
 package com.org.ecommerce.controller;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -14,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -44,19 +44,4 @@ class HomeControllerTests {
                 .andExpect(jsonPath("test", equalTo("23432432")))
                 .andDo(print());
     }
-
-//    @Setter(onMethod_ = {@Autowired})
-//    private WebApplicationContext ctx;
-//
-//    private MockMvc mockMvc;
-//
-//    @Before
-//    public void setup() {
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-//    }
-//
-//    @Test
-//    void contextLoads() {
-//    }
-
 }

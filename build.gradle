@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "io.freefair.lombok" version "6.3.0"
 }
 
 group = 'com.org'
@@ -28,15 +29,23 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.zapodot:embedded-jms-junit5:0.2'
     implementation 'com.google.code.gson:gson:2.10'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
+
+    // jpa entityManagerFactory
+    implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 
 
-    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+//    compileOnly 'org.projectlombok:lombok'
+//    annotationProcessor 'org.projectlombok:lombok'
+//    testCompileOnly 'org.projectlombok:lombok'
+//    testAnnotationProcessor 'org.projectlombok:lombok'
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()

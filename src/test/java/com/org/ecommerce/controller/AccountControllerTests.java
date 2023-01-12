@@ -1,5 +1,6 @@
 package com.org.ecommerce.controller;
 
+import com.org.ecommerce.domain.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,7 +31,11 @@ class AccountControllerTests {
 
     @Test
     public void join() throws Exception {
-        assertThat(controller.getAccounts1()).isNotNull();
+        Account account = Account.builder()
+                .name("jjj")
+                .age("123")
+                .build();
+        assertThat(controller.joinAccount(account)).isNotNull();
     }
 
 }

@@ -16,12 +16,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> getAll() throws Exception {
-        return null;
+        return repository.findAll();
     }
 
     @Override
-    public Account get() throws Exception {
-        return null;
+    public Account get(String email) throws Exception {
+        return repository.findByEmail(email);
     }
 
     @Override

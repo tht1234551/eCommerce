@@ -21,9 +21,30 @@ class AccountRepositoryTest {
     }
 
     @Test
-    public void insert() {
-        Account account = Account.builder().email("test@naver.com").build();
+    public void readAllTest() {
+        assertThat(repository.findAll()).isNotEmpty();
+    }
+
+    @Test
+    public void readTest() {
+        assertThat(repository.findByEmail("test@naver.com")).isNotNull();
+    }
+
+    @Test
+    public void createTest() {
+        int ran = (int) (Math.random() * 999999);
+        Account account = Account.builder().email("test" + ran + "@naver.com").build();
 
         assertThat(repository.save(account)).isNotNull();
     }
+
+    @Test
+    public void updateTest() {
+        Account account = Account.builder()
+                .no(4L)
+                .email("test@naver.com")
+                .build();
+        assertThat(repository.save(account)).isNotNull();
+    }
+
 }

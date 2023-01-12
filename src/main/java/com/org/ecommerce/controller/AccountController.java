@@ -6,9 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 @Slf4j
 @AllArgsConstructor
 public class AccountController {
@@ -16,33 +18,28 @@ public class AccountController {
     private AccountService service;
 
     @GetMapping(path="/")
-    public Account getAccount() {
-        return null;
+    public List<Account> getAccounts() throws Exception {
+        return service.getAll();
     }
 
-    @GetMapping(path="/{id}")
-    public Account getAccount(@PathVariable String id) {
-        return null;
+    @GetMapping(path="/{email}")
+    public Account getAccount(@PathVariable String email) throws Exception {
+        log.info(email);
+        return service.get(email);
     }
 
     @PostMapping(path="/")
-    public Account getAccounts1() throws Exception {
-        Account account = Account
-                .builder()
-                .email("testUsers")
-                .password("asdsadas")
-                .build();
-
+    public Account joinAccount(Account account) throws Exception {
         return service.join(account);
     }
 
     @PutMapping(path="/")
-    public Account getAccounts2() {
+    public Account updateAccount() {
         return null;
     }
 
     @DeleteMapping(path="/")
-    public Account getAccounts3() {
+    public Account deleteAccount() {
         return null;
     }
 }

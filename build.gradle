@@ -34,7 +34,6 @@ dependencies {
     // jpa entityManagerFactory
     implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 
-
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

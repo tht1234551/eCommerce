@@ -3,49 +3,33 @@ package com.org.ecommerce.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 @Entity
-@Table(name = "account")
-public class Account {
+@Table
+public class Account extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "no")
     private Long no;
 
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column
     private String password;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "gender")
+    @Column
     private String gender;
 
-    @Column(name = "age")
+    @Column
     private String age;
 
-    @Column(name = "phone")
+    @Column
     private String phone;
-
-    @Column(updatable = false, name = "regdate")
-    @Temporal(TemporalType.DATE)
-    private Date regdate;
-
-    @Column(name = "modifydate")
-    @Temporal(TemporalType.DATE)
-    private Date modifydate;
-
-//    @Column(name = "modifier")
-//    private String modifier;
-
-
 }

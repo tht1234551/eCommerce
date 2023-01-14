@@ -34,12 +34,12 @@ public class AccountController {
     }
 
     @PutMapping(path="/")
-    public Account updateAccount() {
-        return null;
+    public Account updateAccount(Account account) {
+        return service.update(account);
     }
 
     @DeleteMapping(path="/")
-    public Account deleteAccount() {
-        return null;
+    public Account deleteAccount(String email) {
+        return service.deleteByEmail(email);
     }
 }

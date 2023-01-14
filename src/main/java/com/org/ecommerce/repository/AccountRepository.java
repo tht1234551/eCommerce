@@ -20,5 +20,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @NonNull
     <S extends Account> S save(@NonNull S entity);
 
-    void deleteByEmail(String email);
+    List<Account> deleteByEmail(String email);
 }

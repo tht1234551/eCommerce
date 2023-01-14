@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface AccountService {
 
-    List<Account> getAll() throws Exception;
+    List<Account> getAll();
 
-    Account get(String email) throws Exception;
+    Account get(String email);
 
-    Account update() throws Exception;
+    Account update(Account account);
 
-    Account join(Account account) throws Exception;
+    Account join(Account account);
 
-    Account delete() throws Exception;
+    Account deleteByEmail(String email);
 
 }

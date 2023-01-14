@@ -17,6 +17,7 @@ spring:
       transaction-isolation: TRANSACTION_READ_UNCOMMITTED
   jpa:
     hibernate:
+      generate-ddl: true
       ddl-auto: update
     properties:
       hibernate:

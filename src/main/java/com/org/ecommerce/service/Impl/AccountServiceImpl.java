@@ -12,30 +12,30 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    AccountRepository repository;
+    private AccountRepository repository;
 
     @Override
-    public List<Account> getAll() throws Exception {
+    public List<Account> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Account get(String email) throws Exception {
+    public Account get(String email) {
         return repository.findByEmail(email);
     }
 
     @Override
-    public Account update() throws Exception {
-        return null;
-    }
-
-    @Override
-    public Account join(Account account) throws Exception {
+    public Account update(Account account) {
         return repository.save(account);
     }
 
     @Override
-    public Account delete() throws Exception {
-        return null;
+    public Account join(Account account) {
+        return repository.save(account);
+    }
+
+    @Override
+    public Account deleteByEmail(String email) {
+        return repository.deleteByEmail(email).get(0);
     }
 }

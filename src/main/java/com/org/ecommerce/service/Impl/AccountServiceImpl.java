@@ -26,6 +26,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account update(Account account) {
+        if(account.getNo() == null) throw new IllegalArgumentException();
         return repository.save(account);
     }
 

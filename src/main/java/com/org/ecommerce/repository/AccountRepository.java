@@ -14,11 +14,11 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @NonNull
     List<Account> findAll();
 
-    Account findByEmail(String email);
+    Account findByEmail(@NonNull String email);
 
     @Override
     @NonNull
     <S extends Account> S save(@NonNull S entity);
 
-    List<Account> deleteByEmail(String email);
+    List<Account> deleteByEmail(@NonNull String email);
 }

@@ -1,12 +1,9 @@
 package com.org.ecommerce.service.Impl;
 
-import com.org.ecommerce.domain.Account;
-import com.org.ecommerce.service.AccountService;
+import com.org.ecommerce.domain.User;
+import com.org.ecommerce.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @Rollback
-class AccountServiceImplTest {
+class UserServiceImplTest {
 
     @MockBean
-    AccountService service;
+    UserService service;
 
     @Test
     @DisplayName("context load")
@@ -31,7 +27,7 @@ class AccountServiceImplTest {
 
     @Test
     void getAll() {
-        List<Account> accounts = service.getAll();
+        List<User> accounts = service.readAll();
         assertThat(accounts).isNotNull();
         assertThat(accounts).isNotEmpty();
     }
@@ -39,26 +35,26 @@ class AccountServiceImplTest {
     @Test
     void get() {
         String email = "test@naver.com";
-        Account account = Account
+        User account = User
                 .builder()
                 .email(email)
                 .build();
-        service.join(account);
+        service.insert(account);
 
-        assertThat(service.get(email)).isNotNull();
+        assertThat(service.read(email)).isNotNull();
     }
 
     @Test
     void update() {
         String email = "test@naver.com";
 
-        Account insertTemp = Account
+        User insertTemp = User
                 .builder()
                 .email(email)
                 .build();
-        Account insertResult = service.join(insertTemp);
+        User insertResult = service.insert(insertTemp);
 
-        Account updateTemp = Account
+        User updateTemp = User
                 .builder()
                 .no(insertResult.getNo())
                 .email(insertResult.getEmail())
@@ -66,20 +62,20 @@ class AccountServiceImplTest {
                 .build();
         service.update(updateTemp);
 
-        Account selectResult = service.get(email);
+        User selectResult = service.read(email);
         assertThat(selectResult.getName()).isEqualTo("john doe");
     }
 
     @Test
     void join() {
         String email = "test@naver.com";
-        Account account = Account
+        User account = User
                 .builder()
                 .email(email)
                 .build();
 
-        service.join(account);
-        Account selectResult = service.get(email);
+        service.insert(account);
+        User selectResult = service.read(email);
 
         assertThat(selectResult).isNotNull();
     }
@@ -87,16 +83,16 @@ class AccountServiceImplTest {
     @Test
     void deleteByEmail() {
         String email = "test@naver.com";
-        Account account = Account
+        User account = User
                 .builder()
                 .email(email)
                 .build();
 
-        service.join(account);
+        service.insert(account);
 
-        service.deleteByEmail(email);
+        service.delete(email);
 
-        Account selectResult = service.get(email);
+        User selectResult = service.read(email);
 
     }
 }

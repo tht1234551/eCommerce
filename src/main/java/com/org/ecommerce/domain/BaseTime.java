@@ -18,19 +18,19 @@ import java.time.LocalDateTime;
 public class BaseTime {
 
     @CreatedDate
-    @Column(name = "createdDate", updatable = false, nullable = true)
-    private LocalDateTime createDate;
+    @Column(updatable = false, nullable = true)
+    private LocalDateTime createdDate;
 
     @CreatedBy
-    @Column(name = "creator")
-    private Long creator;
+    @Column
+    private String creator;
 
     @LastModifiedDate
-    @Column(name = "modifiedDate", nullable = true)
+    @Column(nullable = true)
     private LocalDateTime modifiedDate;
 
     @LastModifiedBy
-    @Column(name = "modifier")
+    @Column
     private String modifier;
 
 }

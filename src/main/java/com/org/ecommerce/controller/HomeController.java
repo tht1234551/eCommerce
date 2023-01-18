@@ -12,14 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping
 @Slf4j
 @AllArgsConstructor
 public class HomeController {
 
-    @GetMapping("")
+    @GetMapping("/")
     public String home() {
-        return "index";
+        return "index.html";
     }
 
     @ResponseBody

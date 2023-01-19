@@ -50,6 +50,10 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+
+
+
+
 // 여기서 부터 리액트를 빋드하기 위한 코드
 def reactDir = "$projectDir/src/main/webapp";
 
@@ -61,9 +65,7 @@ sourceSets {
     }
 }
 
-processResources {
-    dependsOn "removeReactBuildFiles"
-}
+
 
 task installReact(type: Exec) {
     workingDir "$reactDir"
@@ -101,4 +103,18 @@ task copyReactBuildFiles(type: Copy) {
 task removeReactBuildFiles(type: Delete) {
     dependsOn "copyReactBuildFiles"
     delete "$reactDir/build"
+}
+
+
+
+
+bootRun {
+    def active = System.getenv('profiles')
+
+    if("dev" == active) {
+//        dependsOn "removeReactBuildFiles"
+        println "dev"
+    } else {
+        dependsOn "removeReactBuildFiles"
+    }
 }

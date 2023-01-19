@@ -17,16 +17,10 @@ import java.util.Map;
 @AllArgsConstructor
 public class HomeController {
 
+    @SuppressWarnings("SpringMVCViewInspection")
     @GetMapping("/")
     public String home() {
         return "index.html";
     }
 
-    @ResponseBody
-    @GetMapping("/test")
-    public Map<String, String> test() {
-        Map<String, String> map = new HashMap<>();
-        map.put("test", "23432432");
-        return map;
-    }
 }

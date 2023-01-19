@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Slf4j
 @AllArgsConstructor
 public class UserController {
@@ -18,22 +18,22 @@ public class UserController {
     private UserService service;
 
     @GetMapping(path="/")
-    public List<User> getAccounts() throws Exception {
+    public List<User> getAccounts() {
         return service.readAll();
     }
 
     @GetMapping(path="/{email}")
-    public User getAccount(@PathVariable String email) throws Exception {
+    public User getAccount(@PathVariable String email) {
         log.info(email);
         return service.read(email);
     }
 
     @PostMapping(path="/")
-    public User joinAccount(User user) throws Exception {
+    public User joinAccount(User user) {
         return service.insert(user);
     }
 
-    @PutMapping(path="/")
+    @PatchMapping(path="/")
     public User updateAccount(User user) {
         return service.update(user);
     }

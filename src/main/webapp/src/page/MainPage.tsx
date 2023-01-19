@@ -7,12 +7,11 @@ import Navigation from "../component/Navigation";
 import Footer from "../component/Footer";
 import Copyright from "../component/Copyright";
 
-function MainPage(): JSX.Element {
+function MainPage() {
     return <>
-        <Intro/>
         <Header/>
+        <Intro/>
         <Navigation/>
-
         <Routes>
             <Route path="/" element={<MainContents />} />
             <Route path="/pub" element={<Publish />} />

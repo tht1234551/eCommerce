@@ -111,10 +111,13 @@ task removeReactBuildFiles(type: Delete) {
 bootRun {
     def active = System.getenv('profiles')
 
-    if("dev" == active) {
-//        dependsOn "removeReactBuildFiles"
-        println "dev"
+    if("prod" == active) {
+        dependsOn "removeReactBuildFiles"
+    } else if("dev" == active) {
+        dependsOn "removeReactBuildFiles"
     } else {
         dependsOn "removeReactBuildFiles"
     }
+
+    println "active is ${active}"
 }

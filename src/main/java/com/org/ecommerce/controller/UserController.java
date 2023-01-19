@@ -17,7 +17,7 @@ public class UserController {
 
     private UserService service;
 
-    @GetMapping(path="/")
+    @GetMapping
     public List<User> getAccounts() {
         return service.readAll();
     }
@@ -28,17 +28,17 @@ public class UserController {
         return service.read(email);
     }
 
-    @PostMapping(path="/")
+    @PostMapping
     public User joinAccount(User user) {
         return service.insert(user);
     }
 
-    @PatchMapping(path="/")
+    @PatchMapping
     public User updateAccount(User user) {
         return service.update(user);
     }
 
-    @DeleteMapping(path="/")
+    @DeleteMapping
     public Long deleteAccount(String email) {
         return service.delete(email);
     }

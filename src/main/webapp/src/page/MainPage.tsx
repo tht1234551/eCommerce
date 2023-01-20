@@ -6,6 +6,7 @@ import Header from "../component/Header";
 import Navigation from "../component/Navigation";
 import Footer from "../component/Footer";
 import Copyright from "../component/Copyright";
+import Test from "../component/Test"
 
 function MainPage() {
     return <>
@@ -15,6 +16,7 @@ function MainPage() {
         <Routes>
             <Route path="/" element={<MainContents />} />
             <Route path="/pub" element={<Publish />} />
+            <Route path="/test" element={<Test />} />
         </Routes>
         <Footer/>
         <Copyright/>

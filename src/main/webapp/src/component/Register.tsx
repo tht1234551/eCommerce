@@ -1,12 +1,22 @@
 import {Button, Container, Form} from "react-bootstrap";
+import InputGroup from 'react-bootstrap/InputGroup';
 
-function Login() {
+function Register() {
     return <>
         <Container>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email"/>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">
+                            <Form.Label>@</Form.Label>
+                        </InputGroup.Text>
+
+                        <Form.Control
+                            placeholder="Username"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                        />
+                    </InputGroup>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -14,9 +24,6 @@ function Login() {
                     <Form.Control type="password" placeholder="Password"/>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out"/>
-                </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
@@ -25,4 +32,4 @@ function Login() {
     </>
 }
 
-export default Login;
+export default Register;

@@ -66,7 +66,7 @@ function Header() {
                     </Col>
                 </Row>
             </Row>
-            <Row>2</Row>
+            <Row>header below contents</Row>
         </Container>
     )
 }

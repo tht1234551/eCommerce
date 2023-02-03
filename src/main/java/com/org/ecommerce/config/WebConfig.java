@@ -1,6 +1,7 @@
 package com.org.ecommerce.config;
 
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -18,18 +19,24 @@ import java.io.IOException;
 @AllArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
+    private final Resource REACT_RESOURCE = new ClassPathResource("/build/index.html");
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/build/")
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
                     @Override
-                    protected Resource getResource(String resourcePath, Resource location) throws IOException {
+                    protected Resource getResource(@NonNull String resourcePath, @NonNull Resource location) throws IOException {
                         Resource requestedResource = location.createRelative(resourcePath);
-                        return requestedResource.exists() && requestedResource.isReadable() ? requestedResource
-                                : new ClassPathResource("/build/index.html");
+
+                        boolean exists = requestedResource.exists();
+                        boolean isReadable = requestedResource.isReadable();
+                        boolean accessAble = exists && isReadable;
+
+                        return accessAble ? requestedResource : REACT_RESOURCE;
                     }
                 });
     }

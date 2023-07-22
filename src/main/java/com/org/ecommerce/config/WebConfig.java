@@ -2,9 +2,15 @@ package com.org.ecommerce.config;
 
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
@@ -16,28 +22,24 @@ import java.io.IOException;
  */
 @Configuration
 //@EnableWebMvc
-@AllArgsConstructor
+//@AllArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
-    private final Resource REACT_RESOURCE = new ClassPathResource("/build/index.html");
+    @Value("${url.prefix}")
+    private String API_URL;
 
+    @Value("${url.version}")
+    private String VERSION;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/build/")
-                .resourceChain(true)
-                .addResolver(new PathResourceResolver() {
-                    @Override
-                    protected Resource getResource(@NonNull String resourcePath, @NonNull Resource location) throws IOException {
-                        Resource requestedResource = location.createRelative(resourcePath);
+    @Bean
+    public DispatcherServlet dispatcherServlet() {
+        return new DispatcherServlet();
+    }
 
-                        boolean exists = requestedResource.exists();
-                        boolean isReadable = requestedResource.isReadable();
-                        boolean accessAble = exists && isReadable;
-
-                        return accessAble ? requestedResource : REACT_RESOURCE;
-                    }
-                });
+    @Bean
+    public DispatcherServletRegistrationBean dispatcherServletRegistration() {
+        DispatcherServletRegistrationBean registration = new DispatcherServletRegistrationBean(dispatcherServlet(), API_URL + VERSION);
+        registration.setName(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME);
+        return registration;
     }
 }

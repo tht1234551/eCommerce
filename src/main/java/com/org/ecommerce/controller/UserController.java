@@ -18,6 +18,11 @@ public class UserController {
 
     private UserService service;
 
+    @GetMapping
+    public List<User> getAccounts() {
+        return service.readAll();
+    }
+
 //    @GetMapping
 //    public List<User> getAccounts() {
 //        return service.readAll();

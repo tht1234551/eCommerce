@@ -40,6 +40,10 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation 'org.jsoup:jsoup:1.15.4'
+
+
 //    compileOnly 'org.projectlombok:lombok'
 //    annotationProcessor 'org.projectlombok:lombok'
 //    testCompileOnly 'org.projectlombok:lombok'
@@ -55,56 +59,56 @@ tasks.named('test') {
 
 
 
-// 여기서 부터 리액트를 빋드하기 위한 코드
-def reactDir = "$projectDir/src/main/webapp";
-
-sourceSets {
-    main {
-        resources {
-            srcDirs = ["$projectDir/src/main/resources"]
-        }
-    }
-}
-
-
-
-task installReact(type: Exec) {
-    workingDir "$reactDir"
-    inputs.dir "$reactDir"
-    group = BasePlugin.BUILD_GROUP
-
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "audit", "fix"
-        commandLine 'npm.cmd', 'install'
-    } else {
-        commandLine "npm", "audit", "fix"
-        commandLine 'npm', 'install'
-    }
-}
-
-task buildReact(type: Exec) {
-    dependsOn "installReact"
-    workingDir "$reactDir"
-    inputs.dir "$reactDir"
-    group = BasePlugin.BUILD_GROUP
-
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "run-script", "build"
-    } else {
-        commandLine "npm", "run-script", "build"
-    }
-}
-
-task copyReactBuildFiles(type: Copy) {
-    dependsOn "buildReact"
-    from "$reactDir/build"
-    into "$projectDir/src/main/resources/build"
-}
-
-task removeReactBuildFiles(type: Delete) {
-    dependsOn "copyReactBuildFiles"
-    delete "$reactDir/build"
-}
+//// 여기서 부터 리액트를 빋드하기 위한 코드
+//def reactDir = "$projectDir/src/main/webapp";
+//
+//sourceSets {
+//    main {
+//        resources {
+//            srcDirs = ["$projectDir/src/main/resources"]
+//        }
+//    }
+//}
+//
+//
+//
+//task installReact(type: Exec) {
+//    workingDir "$reactDir"
+//    inputs.dir "$reactDir"
+//    group = BasePlugin.BUILD_GROUP
+//
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        commandLine "npm.cmd", "audit", "fix"
+//        commandLine 'npm.cmd', 'install'
+//    } else {
+//        commandLine "npm", "audit", "fix"
+//        commandLine 'npm', 'install'
+//    }
+//}
+//
+//task buildReact(type: Exec) {
+//    dependsOn "installReact"
+//    workingDir "$reactDir"
+//    inputs.dir "$reactDir"
+//    group = BasePlugin.BUILD_GROUP
+//
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        commandLine "npm.cmd", "run-script", "build"
+//    } else {
+//        commandLine "npm", "run-script", "build"
+//    }
+//}
+//
+//task copyReactBuildFiles(type: Copy) {
+//    dependsOn "buildReact"
+//    from "$reactDir/build"
+//    into "$projectDir/src/main/resources/build"
+//}
+//
+//task removeReactBuildFiles(type: Delete) {
+//    dependsOn "copyReactBuildFiles"
+//    delete "$reactDir/build"
+//}
 
 
 
@@ -112,13 +116,13 @@ task removeReactBuildFiles(type: Delete) {
 bootRun {
     def active = System.getenv('profiles')
 
-    if("prod" == active) {
-        dependsOn "removeReactBuildFiles"
-    } else if("dev" == active) {
-        dependsOn "removeReactBuildFiles"
-    } else {
-        dependsOn "removeReactBuildFiles"
-    }
+//    if("prod" == active) {
+//        dependsOn "removeReactBuildFiles"
+//    } else if("dev" == active) {
+//        dependsOn "removeReactBuildFiles"
+//    } else {
+//        dependsOn "removeReactBuildFiles"
+//    }
 
     println "active is ${active}"
 }

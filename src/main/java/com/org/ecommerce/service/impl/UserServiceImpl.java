@@ -1,4 +1,4 @@
-package com.org.ecommerce.service.Impl;
+package com.org.ecommerce.service.impl;
 
 import com.org.ecommerce.domain.User;
 import com.org.ecommerce.repository.UserRepository;

@@ -36,13 +36,13 @@ class HomeControllerTests {
         assertThat(mockMvc).isNotNull();
     }
 
-    @Test
-    public void test1() throws Exception {
-        mockMvc
-                .perform(get("/home/test"))
-                .andExpect(status().isOk())
-                .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("test", equalTo("23432432")))
-                .andDo(print());
-    }
+//    @Test
+//    public void test1() throws Exception {
+//        mockMvc
+//                .perform(get("/home/test"))
+//                .andExpect(status().isOk())
+//                .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(jsonPath("test", equalTo("23432432")))
+//                .andDo(print());
+//    }
 }

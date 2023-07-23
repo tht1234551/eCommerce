@@ -9,4 +9,4 @@ CMD ["ls", "-al"]
 
 EXPOSE 8081
 
-# ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/docker-springboot.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","./docker-springboot.jar"]
